@@ -5,10 +5,11 @@ import com.example.cardapio.food.FoodRepository;
 import com.example.cardapio.food.FoodResponseDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import jakarta.persistence.Id;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,5 +28,49 @@ public class FoodController {
     public List<FoodResponseDto> getAll() {
         List<FoodResponseDto> foodList = repository.findAll().stream().map(FoodResponseDto::new).toList();
         return foodList;
+    }
+
+    @GetMapping("/{id}")
+    public List<FoodResponseDto> getById(@PathVariable Long id) {
+        List<FoodResponseDto> food = repository.findById(id).stream().map(FoodResponseDto::new).toList();
+        //.stream().map(FoodResponseDto::new).filter(c -> c.id() == id).toList();
+        return food;
+    }
+
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public HttpStatusCode insertFood(@RequestBody Food food) {
+        try {
+            repository.save(food);
+            return HttpStatusCode.valueOf(200);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    @PutMapping("/{id}")
+    public HttpStatusCode attFood(@RequestBody Food food, @PathVariable Long id) {
+        List<FoodResponseDto> foodList = repository.findById(id).stream().map(FoodResponseDto::new).toList();
+        if (foodList.isEmpty()) {
+            throw new Error("o item que está procurando não existe");
+        } else {
+            food.setId(id);
+            repository.save(food);
+            return HttpStatusCode.valueOf(200);
+        }
+    }
+
+    @DeleteMapping("{id}")
+    public HttpStatusCode deleteFood(@PathVariable Long id) {
+        List<Food> foodList = repository.findById(id).stream().toList();
+        if (foodList.isEmpty()) {
+            throw new Error("o item que está procurando não existe");
+        } else {
+            try {
+                repository.deleteById(id);
+                return HttpStatusCode.valueOf(200);
+            } catch (Exception e) {
+                throw e;
+            }
+        }
     }
 }
