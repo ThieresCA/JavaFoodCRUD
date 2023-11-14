@@ -3,9 +3,6 @@ package com.example.cardapio.controller;
 import com.example.cardapio.food.Food;
 import com.example.cardapio.food.FoodRepository;
 import com.example.cardapio.food.FoodResponseDto;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import jakarta.persistence.Id;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
@@ -33,7 +30,6 @@ public class FoodController {
     @GetMapping("/{id}")
     public List<FoodResponseDto> getById(@PathVariable Long id) {
         List<FoodResponseDto> food = repository.findById(id).stream().map(FoodResponseDto::new).toList();
-        //.stream().map(FoodResponseDto::new).filter(c -> c.id() == id).toList();
         return food;
     }
 
@@ -49,7 +45,7 @@ public class FoodController {
 
     @PutMapping("/{id}")
     public HttpStatusCode attFood(@RequestBody Food food, @PathVariable Long id) {
-        List<FoodResponseDto> foodList = repository.findById(id).stream().map(FoodResponseDto::new).toList();
+        var foodList = repository.findById(id);
         if (foodList.isEmpty()) {
             throw new Error("o item que está procurando não existe");
         } else {
