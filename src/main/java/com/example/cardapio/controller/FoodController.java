@@ -45,6 +45,7 @@ public class FoodController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Realiza a inserção da comida no banco de dados", method = "GET")
     public HttpStatusCode insertFood(@RequestBody FoodRequestDto food) {
         try {
             Food newFood = new Food (null, food.title(), food.image(), food.price());
