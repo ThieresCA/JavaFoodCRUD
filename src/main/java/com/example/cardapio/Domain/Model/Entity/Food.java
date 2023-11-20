@@ -1,4 +1,4 @@
-package com.example.cardapio.food;
+package com.example.cardapio.Domain.Model.Entity;
 
 import jakarta.persistence.*;
 import lombok.*;

@@ -1,4 +1,4 @@
-package com.example.cardapio.user;
+package com.example.cardapio.Domain.user;
 
 public record UserRequestDto(String Name, String Email, String Senha) {
     public UserRequestDto(User user) {

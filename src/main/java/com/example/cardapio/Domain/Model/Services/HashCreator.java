@@ -1,4 +1,4 @@
-package com.example.cardapio.services;
+package com.example.cardapio.Domain.Model.Services;
 
 import java.security.MessageDigest;
 import java.math.BigInteger;

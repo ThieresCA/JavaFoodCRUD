@@ -1,22 +1,23 @@
-package com.example.cardapio.controller;
+package com.example.cardapio.Application;
 
-import com.example.cardapio.services.HashCreator;
-import com.example.cardapio.user.User;
-import com.example.cardapio.user.UserRepository;
-import com.example.cardapio.user.UserRequestDto;
-import com.example.cardapio.user.UserResponseDto;
+import com.example.cardapio.Domain.Model.Entity.User;
+
+
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Optional;
 
-import static com.example.cardapio.services.HashCreator.createSHAHash;
+import static com.example.cardapio.Services.HashCreator.createSHAHash;
 
 
 //dizendo que essa é uma classe de controller
@@ -27,8 +28,7 @@ import static com.example.cardapio.services.HashCreator.createSHAHash;
 @Tag(name = "User-Controller")
 public class UserController {
 
-    @Autowired
-    private UserRepository repository;
+
     @GetMapping()
     @Operation(summary = "Realiza a consulta de todas os usuarios", method = "GET")
     public List<UserResponseDto> getAll() {
@@ -72,13 +72,14 @@ public class UserController {
     @DeleteMapping("{id}")
     @Operation(summary = "Realiza a remoção do usuario especificado", method = "DELETE")
     public HttpStatusCode deleteUser(@PathVariable Long id) {
+
         List<User> userList = repository.findById(id).stream().toList();
         if (userList.isEmpty()) {
             throw new Error("o item que está procurando não existe");
         } else {
             try {
-                repository.deleteById(id);
-                return HttpStatusCode.valueOf(200);
+
+                return  HttpStatusCode.valueOf(200);
             } catch (Exception e) {
                 throw e;
             }

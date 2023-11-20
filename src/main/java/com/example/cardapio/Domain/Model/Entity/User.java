@@ -1,7 +1,9 @@
-package com.example.cardapio.user;
+package com.example.cardapio.Domain.Model.Entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.nio.charset.StandardCharsets;
@@ -19,9 +21,11 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long Id;
+    @NotEmpty
     public String Name;
-    @Email(message = "Email should be valid")
+    @Email(message = "Email should be valid") @NotNull
     public String Email;
+    @NotEmpty
     public String Senha;
 }
 
