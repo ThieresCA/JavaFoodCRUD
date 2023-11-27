@@ -5,6 +5,7 @@ import com.example.cardapio.Domain.Model.Entity.User;
 
 import com.example.cardapio.Domain.user.UserRequestDto;
 import com.example.cardapio.Domain.user.UserResponseDto;
+import com.example.cardapio.Interactor.UserUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 

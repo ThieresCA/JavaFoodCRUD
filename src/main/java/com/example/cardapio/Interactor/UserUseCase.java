@@ -1,4 +1,4 @@
-package com.example.cardapio.Application;
+package com.example.cardapio.Interactor;
 
 import com.example.cardapio.Domain.Model.Entity.User;
 import com.example.cardapio.Domain.user.UserRequestDto;
