@@ -45,7 +45,7 @@ public class UserUseCase {
         if (violations.isEmpty()) {
             try {
                 String hash = createSHAHash(user.Senha());
-                newUser.setSenha(hash);
+                newUser.setPassword(hash);
                 _repository.save(newUser);
                 return true;
             } catch (Exception e) {

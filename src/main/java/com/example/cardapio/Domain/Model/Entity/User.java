@@ -25,6 +25,6 @@ public class User {
     @Email(message = "Email should be valid") @NotNull
     public String Email;
     @NotEmpty
-    public String Senha;
+    public String Password;
 }
 
